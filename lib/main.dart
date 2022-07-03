@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_findeat/cubit/auth_cubit.dart';
 import 'package:flutter_application_findeat/cubit/page_cubit.dart';
+import 'package:flutter_application_findeat/cubit/resto_cubit.dart';
+import 'package:flutter_application_findeat/cubit/riview_cubit.dart';
 import 'package:flutter_application_findeat/ui/pages/splash_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -24,6 +26,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => PageCubit()),
         BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => RestoCubit()),
+        BlocProvider(create: (context) => RiviewCubit()),
       ],
       child: const GetMaterialApp(
         debugShowCheckedModeBanner: false,

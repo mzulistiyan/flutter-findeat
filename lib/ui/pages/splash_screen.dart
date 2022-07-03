@@ -1,9 +1,13 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_findeat/cubit/auth_cubit.dart';
 import 'package:flutter_application_findeat/ui/pages/login_page.dart';
+import 'package:flutter_application_findeat/ui/pages/main_page.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/src/provider.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({Key? key}) : super(key: key);
@@ -17,7 +21,13 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void initState() {
     // TODO: implement initState
     Timer(const Duration(seconds: 5), () {
-      Get.to(LoginPage());
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        Get.to(const LoginPage());
+      } else {
+        context.read<AuthCubit>().getCurrentUser(user.uid);
+        Get.off(MainPage());
+      }
     });
     super.initState();
   }

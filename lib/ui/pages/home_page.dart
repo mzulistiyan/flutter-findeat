@@ -1,11 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_findeat/cubit/resto_cubit.dart';
+import 'package:flutter_application_findeat/models/resto_model.dart';
+import 'package:flutter_application_findeat/ui/widget/resto_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/src/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    context.read<RestoCubit>().fetchDestinations();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget collectionResto() {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset(
+                    'assets/images/gambar_1.png',
+                  ),
+                ),
+                Container(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset(
+                    'assets/images/gambar_2.png',
+                  ),
+                ),
+                Container(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset(
+                    'assets/images/gambar_3.png',
+                  ),
+                ),
+                Container(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset(
+                    'assets/images/gambar_4.png',
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget popularResto(List<RestoModel> resto) {
+      return Container(
+        height: 200,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children:
+                resto.map((RestoModel resto) => RestoCard(resto)).toList(),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Color(0xffEEEDDE),
       appBar: AppBar(
@@ -65,7 +137,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 50,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,10 +160,17 @@ class HomePage extends StatelessWidget {
                   )
                 ],
               ),
+              SizedBox(
+                height: 15,
+              ),
+              collectionResto(),
+              SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
                   Text(
-                    'Collections',
+                    'Popular restaurant',
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -99,7 +178,31 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              BlocConsumer<RestoCubit, RestoState>(
+                listener: (context, state) {
+                  if (state is RestoFailed) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.red,
+                        content: Text(state.error),
+                      ),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is RestoSuccess) {
+                    return popularResto(state.resto);
+                  }
+
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
             ],
           ),
         ),
