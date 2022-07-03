@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_findeat/cubit/auth_cubit.dart';
 import 'package:flutter_application_findeat/ui/pages/main_page.dart';
 import 'package:flutter_application_findeat/ui/pages/register_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,6 +14,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController passwordController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +48,9 @@ class _LoginPageState extends State<LoginPage> {
                 color: const Color(0xff203239),
               ),
             ),
-            TextFormField(),
+            TextFormField(
+              controller: emailController,
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -58,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextFormField(
               obscureText: true,
+              controller: passwordController,
             ),
             const SizedBox(
               height: 50,
@@ -91,27 +98,54 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 50,
             ),
-            Center(
-              child: Container(
-                  width: 150,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Color(0xff203239),
-                  ),
-                  child: Center(
+            BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthSuccess) {
+                  Get.off(MainPage());
+                } else if (state is AuthFailed) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(state.error),
+                    ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                if (state is AuthLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return Center(
+                  child: Container(
+                    width: 150,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: Color(0xff203239),
+                    ),
+                    child: Center(
                       child: TextButton(
-                          onPressed: () {
-                            Get.to(MainPage());
-                          },
-                          child: Text(
-                            'Login',
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          )))),
+                        onPressed: () {
+                          context.read<AuthCubit>().signIn(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              );
+                        },
+                        child: Text(
+                          'Login',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             )
           ],
         ),

@@ -26,7 +26,7 @@ class CustomBottomNav extends StatelessWidget {
           icon,
           Container(
             width: 30,
-            height: 2,
+            height: 3,
             decoration: BoxDecoration(
                 color: context.read<PageCubit>().state == index
                     ? Colors.blue

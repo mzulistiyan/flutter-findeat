@@ -36,7 +36,7 @@ class MainPage extends StatelessWidget {
           height: 60,
           margin: EdgeInsets.only(bottom: 30, left: 16, right: 16, top: 30),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Color(0xff203239),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Row(
@@ -44,15 +44,27 @@ class MainPage extends StatelessWidget {
             children: [
               CustomBottomNav(
                 index: 0,
-                icon: Icon(Icons.home),
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.white,
+                  size: 35,
+                ),
               ),
               CustomBottomNav(
                 index: 1,
-                icon: Icon(Icons.search),
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: 35,
+                ),
               ),
               CustomBottomNav(
                 index: 2,
-                icon: Icon(Icons.person),
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: 35,
+                ),
               ),
             ],
           ),
