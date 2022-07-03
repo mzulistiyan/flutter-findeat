@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_findeat/ui/pages/main_page.dart';
+import 'package:flutter_application_findeat/ui/pages/register_page.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,9 +15,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffEEEDDE),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xffEEEDDE),
       body: Container(
-        margin: EdgeInsets.all(24),
+        margin: const EdgeInsets.all(24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,20 +29,23 @@ class _LoginPageState extends State<LoginPage> {
                 style: GoogleFonts.poppins(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff203239),
+                  color: const Color(0xff203239),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             Text(
               'Email',
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Color(0xff203239),
+                color: const Color(0xff203239),
               ),
             ),
             TextFormField(),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -49,8 +56,10 @@ class _LoginPageState extends State<LoginPage> {
                 color: Color(0xff203239),
               ),
             ),
-            TextFormField(),
-            SizedBox(
+            TextFormField(
+              obscureText: true,
+            ),
+            const SizedBox(
               height: 50,
             ),
             Row(
@@ -63,18 +72,46 @@ class _LoginPageState extends State<LoginPage> {
                     color: Color(0xff203239),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
-                Text(
-                  'Register',
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff217D83),
+                GestureDetector(
+                  onTap: () => Get.to(const RegisterPage()),
+                  child: Text(
+                    'Register',
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff217D83),
+                    ),
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Center(
+              child: Container(
+                  width: 150,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Color(0xff203239),
+                  ),
+                  child: Center(
+                      child: TextButton(
+                          onPressed: () {
+                            Get.to(MainPage());
+                          },
+                          child: Text(
+                            'Login',
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          )))),
             )
           ],
         ),

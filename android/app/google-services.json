@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "410154587235",
+    "project_id": "finedeatapp",
+    "storage_bucket": "finedeatapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410154587235:android:bb7bc5af0f0f07c676d456",
+        "android_client_info": {
+          "package_name": "com.tubes.flutter_application_findeat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410154587235-2e3p5k7cs4qmi3bdrktt5rd124crma81.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiR1ZQqUN_7L5Vi9NQ7__TUgFmX23iSTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410154587235-2e3p5k7cs4qmi3bdrktt5rd124crma81.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
