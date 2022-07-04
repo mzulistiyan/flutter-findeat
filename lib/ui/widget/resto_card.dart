@@ -24,7 +24,7 @@ class RestoCard extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 10),
                     width: 100,
-                    height: 150,
+                    height: 160,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
@@ -51,12 +51,16 @@ class RestoCard extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          resto.name,
-                          style: GoogleFonts.poppins(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                        Container(
+                          width: 80,
+                          child: Text(
+                            resto.name,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         )
                       ],

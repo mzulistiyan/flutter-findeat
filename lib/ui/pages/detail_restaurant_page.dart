@@ -1,12 +1,15 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_findeat/cubit/riview_cubit.dart';
 import 'package:flutter_application_findeat/models/resto_model.dart';
 import 'package:flutter_application_findeat/models/riview_model.dart';
 import 'package:flutter_application_findeat/ui/pages/create_riview_page.dart';
+import 'package:flutter_application_findeat/ui/pages/menu_page.dart';
 import 'package:flutter_application_findeat/ui/widget/riview_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/src/provider.dart';
 
 class DetailRestaurantPage extends StatefulWidget {
@@ -18,10 +21,31 @@ class DetailRestaurantPage extends StatefulWidget {
 }
 
 class _DetailRestaurantPageState extends State<DetailRestaurantPage> {
+  final Completer<GoogleMapController> _controller = Completer();
+  static const LatLng center = LatLng(-6.9720999, 107.6364436);
+  LatLng _lastMapPosition = center;
+
+  MapType _currentMapType = MapType.normal;
   void initState() {
     // TODO: implement initState
     context.read<RiviewCubit>().fetchCourse(widget.resto.id);
     super.initState();
+  }
+
+  void _onMapTypeButtonPressed() {
+    setState(() {
+      _currentMapType = _currentMapType == MapType.normal
+          ? MapType.satellite
+          : MapType.normal;
+    });
+  }
+
+  void _onCameraMove(CameraPosition position) {
+    _lastMapPosition = position.target;
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    _controller.complete(controller);
   }
 
   @override
@@ -30,6 +54,14 @@ class _DetailRestaurantPageState extends State<DetailRestaurantPage> {
       return Column(
         children:
             riview.map((RiviewModel riview) => RiviewCard(riview)).toList(),
+      );
+    }
+
+    Widget _showDialogMenu() {
+      return Dialog(
+        child: Container(
+          child: Image.asset('assets/images/gambar_banner_1.png'),
+        ),
       );
     }
 
@@ -143,7 +175,7 @@ class _DetailRestaurantPageState extends State<DetailRestaurantPage> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 10),
+                        padding: EdgeInsets.all(10),
                         width: 170,
                         height: 200,
                         decoration: BoxDecoration(
@@ -159,16 +191,24 @@ class _DetailRestaurantPageState extends State<DetailRestaurantPage> {
                             ),
                           ],
                         ),
+                        child: GoogleMap(
+                          initialCameraPosition:
+                              const CameraPosition(target: center, zoom: 20.0),
+                          mapType: _currentMapType,
+                        ),
                       ),
                       SizedBox(
                         height: 100,
                       ),
-                      Text(
-                        'See All Menus >>',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.blue,
+                      GestureDetector(
+                        onTap: () => Get.to(const MenuAllPage()),
+                        child: Text(
+                          'See All Menus >>',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blue,
+                          ),
                         ),
                       ),
                     ],
@@ -183,24 +223,35 @@ class _DetailRestaurantPageState extends State<DetailRestaurantPage> {
                           color: Colors.black,
                         ),
                       ),
-                      Container(
-                        width: 160,
-                        height: 320,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          image: DecorationImage(
-                            image:
-                                AssetImage('assets/images/gambar_banner_1.png'),
+                      GestureDetector(
+                        onTap: () => {
+                          showDialog(
+                            barrierDismissible: true,
+                            context: context,
+                            builder: (context) {
+                              return _showDialogMenu();
+                            },
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
+                        },
+                        child: Container(
+                          width: 160,
+                          height: 320,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  'assets/images/gambar_banner_1.png'),
                             ),
-                          ],
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 7,
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

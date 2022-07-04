@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_findeat/cubit/resto_cubit.dart';
 import 'package:flutter_application_findeat/models/resto_model.dart';
+import 'package:flutter_application_findeat/ui/pages/collection_page.dart';
 import 'package:flutter_application_findeat/ui/widget/resto_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/src/provider.dart';
 
@@ -150,12 +152,15 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.black,
                     ),
                   ),
-                  Text(
-                    'See All',
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                  GestureDetector(
+                    onTap: () => Get.to(const CollectionPage()),
+                    child: Text(
+                      'See All',
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
                     ),
                   )
                 ],

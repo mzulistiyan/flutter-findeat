@@ -83,11 +83,30 @@ class ProfilePage extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     );
                   }
-                  return ElevatedButton(
-                    onPressed: () {
-                      context.read<AuthCubit>().signOut();
-                    },
-                    child: Text('Logout'),
+                  return Center(
+                    child: Container(
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Color(0xff203239),
+                      ),
+                      child: Center(
+                        child: TextButton(
+                          onPressed: () {
+                            context.read<AuthCubit>().signOut();
+                          },
+                          child: Text(
+                            'Logout',
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   );
                 },
               )
