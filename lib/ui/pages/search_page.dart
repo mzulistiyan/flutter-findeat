@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_findeat/ui/pages/home_page.dart';
+import 'package:flutter_application_findeat/ui/pages/resto/popular_resto_bubat.dart';
+import 'package:flutter_application_findeat/ui/pages/resto/popular_resto_dago.dart';
+import 'package:flutter_application_findeat/ui/pages/resto/popular_resto_lembang.dart';
+import 'package:flutter_application_findeat/ui/pages/resto/popular_resto_lengkong.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchPage extends StatelessWidget {
@@ -92,56 +98,71 @@ class SearchPage extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        'Riau',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      GestureDetector(
+                        onTap: () => Get.to(const HomePage()),
+                        child: Text(
+                          'Riau',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       Divider(
                         thickness: 1,
                       ),
-                      Text(
-                        'Lembang',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      GestureDetector(
+                        onTap: () => Get.to(const PopularRestoLembangPage()),
+                        child: Text(
+                          'Lembang',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       Divider(
                         thickness: 1,
                       ),
-                      Text(
-                        'Dago',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      GestureDetector(
+                        onTap: () => Get.to(const PopularRestoDagoPage()),
+                        child: Text(
+                          'Dago',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       Divider(
                         thickness: 1,
                       ),
-                      Text(
-                        'Lengkong',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      GestureDetector(
+                        onTap: () => Get.to(const PopularRestoLengkongPage()),
+                        child: Text(
+                          'Lengkong',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       Divider(
                         thickness: 1,
                       ),
-                      Text(
-                        'Bauh Batu',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                      GestureDetector(
+                        onTap: () => Get.to(const PopularRestoBuahBatuPage()),
+                        child: Text(
+                          'Bauh Batu',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ],

@@ -60,7 +60,7 @@ class _DetailRestaurantPageState extends State<DetailRestaurantPage> {
     Widget _showDialogMenu() {
       return Dialog(
         child: Container(
-          child: Image.asset('assets/images/gambar_banner_1.png'),
+          child: Image.network(widget.resto.imageMenuUrl),
         ),
       );
     }
@@ -235,13 +235,13 @@ class _DetailRestaurantPageState extends State<DetailRestaurantPage> {
                         },
                         child: Container(
                           width: 160,
-                          height: 320,
+                          height: 250,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             image: DecorationImage(
-                              image: AssetImage(
-                                  'assets/images/gambar_banner_1.png'),
-                            ),
+                                image: NetworkImage(
+                              widget.resto.imageMenuUrl,
+                            )),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),

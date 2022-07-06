@@ -3,12 +3,14 @@ class RestoModel {
   final String name;
   final String alamat;
   final String imageUrl;
+  final String imageMenuUrl;
 
   RestoModel({
     this.id = '',
     this.name = '',
     this.alamat = '',
     this.imageUrl = '',
+    this.imageMenuUrl = '',
   });
 
   factory RestoModel.fromJson(String id, Map<String, dynamic> json) =>
@@ -17,6 +19,7 @@ class RestoModel {
         name: json['name'],
         alamat: json['alamat'],
         imageUrl: json['imageUrl'],
+        imageMenuUrl: json['imageMenuUrl'],
       );
 
   Map<String, dynamic> toJson() {
@@ -25,6 +28,7 @@ class RestoModel {
       'name': name,
       'alamat': alamat,
       'imageUrl': imageUrl,
+      'imageMenuUrl': imageMenuUrl,
     };
   }
 
@@ -34,5 +38,6 @@ class RestoModel {
         name,
         alamat,
         imageUrl,
+        imageMenuUrl,
       ];
 }
