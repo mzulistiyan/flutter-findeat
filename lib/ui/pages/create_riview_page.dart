@@ -185,7 +185,9 @@ class _CreateRiviewPageState extends State<CreateRiviewPage> {
                         ),
                         child: Center(
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.back();
+                            },
                             child: Text(
                               'Cancel',
                               style: GoogleFonts.poppins(

@@ -19,7 +19,7 @@ class _PopularRestoDagoPageState extends State<PopularRestoDagoPage> {
   @override
   void initState() {
     // TODO: implement initState
-    context.read<RestoCubit>().fetchDestinations();
+    context.read<RestoCubit>().fetchResto();
     super.initState();
   }
 

@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
-    context.read<RestoCubit>().fetchDestinations();
+    context.read<RestoCubit>().fetchResto();
     super.initState();
   }
 

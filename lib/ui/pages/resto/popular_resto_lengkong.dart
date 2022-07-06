@@ -20,7 +20,7 @@ class _PopularRestoLengkongPageState extends State<PopularRestoLengkongPage> {
   @override
   void initState() {
     // TODO: implement initState
-    context.read<RestoCubit>().fetchDestinations();
+    context.read<RestoCubit>().fetchResto();
     super.initState();
   }
 

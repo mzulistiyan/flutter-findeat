@@ -7,7 +7,7 @@ part 'resto_state.dart';
 
 class RestoCubit extends Cubit<RestoState> {
   RestoCubit() : super(RestoInitial());
-  void fetchDestinations() async {
+  void fetchResto() async {
     try {
       emit(RestoLoading());
 
